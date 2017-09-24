@@ -240,26 +240,19 @@ new Vue({
     start(e, good){
       good.startX = e.changedTouches[0].clientX
     },
-    end(e,shop,shopIndex,good,goodIndex){
+    end(e,shopIndex,good,goodIndex){
       let endX = e.changedTouches[0].clientX
       console.log('endX: ' + endX)
-      let left = '0px'
+      console.log(good.id)
+      let left = '0'
       console.log('good.startX: ' + good.startX)
       if(good.startX - endX>100){
         left = '-60px'
-        var delBtn = this.$refs.delBtn[goodIndex]
-        delBtn.style.right = '-700px'
-        console.log(delBtn)
-        // 删除
-        shop.editing = true
       }
       if(endX - good.startX>100){
         left = '0px'
-        var delBtn = this.$refs.delBtn[goodIndex]
-        delBtn.style.right = '-640px'
-        shop.editing = false
       }
-      let goodNode = document.getElementById('goods')
+      console.log(this.$refs[`goods-${shopIndex}-${goodIndex}`])
       Volecity(this.$refs[`goods-${shopIndex}-${goodIndex}`],{
         left
       })

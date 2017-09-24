@@ -1,15 +1,10 @@
-import 'css/common.css'
-import './member_base.css'
 import './member.css'
 
-import Vue from 'vue'
-import mixin from 'js/mixin.js'
+import router from './router'
+import store from './store'
 
 new Vue({
   el: '#member',
-  components: { Foot },
-  data(){
-    return {}
-  },
-  mixins: [mixin]
+  router,
+  store
 })

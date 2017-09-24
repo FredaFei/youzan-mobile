@@ -27,31 +27,28 @@
       <div class="content clearfix js-page-content">
         <div id="cart-container">
           <div>
-            <!---->
-            <!---->
-            <!---->
             <div class="js-shop-list shop-list">
               <div class="block block-order block-cart" v-for="(shop,shopIndex) in lists">
                 <div class="header">
-                  <div class="select-group js-select-group">
+                  <div class="select-group js-select-group" @click="selectShop(shop)">
                     <span class="check" :class="{checked: editingShop ? shop.removechecked : shop.checked}"></span>
                   </div>
-                  <a class="shop-title" @click="selectShop(shop,shop.goodsList)">
+                  <a class="shop-title">
                       <i class="custom-store-img">店铺：</i>{{shop.shopTitle}}
                     </a>
-                  <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list" @click="editMsg(shop,shopIndex)">
-                    {{shop.editMsg}}
-
-                  </a>
+                  <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list"
+                    @click="editMsg(shop,shopIndex)">{{shop.editMsg}}</a>
                 </div>
 
                 <div>
                   <ul class="js-list block block-list block-list-cart border-0">
-                    <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsList"
-                    :class="{editing: shop.editing}"
-                    @touchstart="start($event,good)"
-                    @touchend="end($event,shop,shopIndex,good,goodIndex)"
-                    :ref="'goods-'+shopIndex+'-'+goodIndex">
+                    <li class="block-item block-item-cart"
+                      v-for="(good,goodIndex) in shop.goodsList"
+                      :key="good.id" :class="{editing: shop.editing}"
+                      @touchstart="start($event,good)"
+                      @touchend="end($event,shopIndex,good,goodIndex)"
+                      :ref="'goods-'+shopIndex+'-'+goodIndex"
+                    >
                       <div>
                         <div class="check-container" @click="selectGood(shop,good)">
                           <span class="check" :class="{checked: editingShop ? good.removechecked : good.checked}"></span>
@@ -89,7 +86,7 @@
                           </div>
                           <div class="error-box"></div>
                         </div>
-                        <div class="delete-btn" ref="delBtn" v-show="shop.editing" @click="remove(shop,good,shopIndex,goodIndex)"><span>删除</span></div>
+                        <div class="delete-btn" @click="remove(shop,good,shopIndex,goodIndex)"><span>删除</span></div>
                       </div>
                     </li>
                   </ul>
@@ -150,8 +147,8 @@
                 结算 ({{selectLists.length}})
               </button>
                 <!-- 编辑状态 -->
-                <button href="javascript:;" v-show="editingShop" :disabled="!removeLists.length"
-                class="j-delete-goods btn font-size-14 btn-red" @click="removeList">删除
+                <button href="javascript:;" v-show="editingShop" :disabled="!removeLists.length" class="j-delete-goods btn font-size-14 btn-red"
+                  @click="removeList">删除
                     </button>
               </div>
             </div>
@@ -161,23 +158,21 @@
     </div>
     <!--遮罩层-->
     <div id="5S3WASgCzc" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px;
-    background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1;"
-    v-show="removePop"></div>
+    background-color: rgba(0, 0, 0, 0.7); z-index: 1000; transition: none 0.2s ease; opacity: 1;" v-show="removePop"></div>
     <!--弹出层-->
     <div id="313ffnukAf" class="popout-confirm popout-box" style="overflow: hidden;
       position: absolute; z-index: 1000; transition: opacity 300ms ease; top: 50%; left: 50%;
       transform: translate3d(-50%, -50%, 0px); visibility: visible; border-radius: 4px;
-      background: white; width: 270px; padding: 15px; opacity: 1;"
-      v-show="removePop">
+      background: white; width: 270px; padding: 15px; opacity: 1;" v-show="removePop">
       <div class="confirm-content font-size-14" style="line-height: 20px; padding: 5px 5px 10px;">
         {{removeMsg}}
       </div>
       <hr style="margin: 9px -15px 10px;">
-      <div class="btn-2-1">
-        <p class="js-cancel center font-size-16" style="padding-top: 5px;" @click="removeCancel()">取消</p>
+      <div class="btn-2-1" style="width: 48.5%;">
+        <p class="js-cancel center font-size-16" style="padding-top: 5px;" @click="removeCancel">取消</p>
       </div>
-      <div class="btn-2-1">
-        <p class="js-ok center c-green font-size-16" style="padding-top: 5px;" @click="removeConfirm()">确定</p>
+      <div class="btn-2-1" style="width: 48.5%;">
+        <p class="js-ok center c-green font-size-16" style="padding-top: 5px;" @click="removeConfirm">确定</p>
       </div>
     </div>
     <div class="footer" style="min-height: 86px;">
@@ -186,7 +181,7 @@
           <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a> </div>
       </div>
     </div>
-    <Foot></Foot>
+    <!--<Foot></Foot>-->
   </div>
 
 </body>
